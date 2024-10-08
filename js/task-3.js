@@ -8,4 +8,5 @@ input.addEventListener('input', () => {
     output.textContent = 'Anonymous';
   } else {
     output.textContent = trimmedValue;
+  }
 });
