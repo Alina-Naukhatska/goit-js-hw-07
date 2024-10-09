@@ -9,15 +9,17 @@ create.addEventListener("click", createMarcup);
 destroy.addEventListener("click", () => {
   input.value = "";
   clear();
-})
+});
 
 function createMarcup() {
-  if(input.value < 1 || input.value > 100) {
+  const amount = Number(input.value);
+  if (amount < 1 || amount > 100 || isNaN(amount)) {
     console.log("error");
     return;
   }
 
-  createBoxes(input.value);
+  createBoxes(amount);
+  input.value = "";
 }
 
 function clear() {
@@ -28,15 +30,19 @@ function clear() {
 function createBoxes(amount) {
   clear();
   
-  for(let i = 0; i < amount; i++) {
+  const fragment = document.createDocumentFragment();
+
+  for (let i = 0; i < amount; i++) {
     const box = document.createElement("div");
     box.style.width = `${sizes}px`;
     box.style.height = `${sizes}px`;
     box.style.backgroundColor = getRandomHexColor();
 
-    boxes.append(box);
-    sizes +=10;
+    fragment.appendChild(box);
+    sizes += 10;
   }
+
+  boxes.appendChild(fragment);
 }
 
 function getRandomHexColor() {
